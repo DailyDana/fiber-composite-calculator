@@ -1,0 +1,10 @@
+# Fiber composite calculator — dependencies
+numpy>=1.26
+pandas>=2.0
+matplotlib>=3.8
+reportlab>=4.0
+streamlit>=1.62  # st.navigation, width="stretch"
+
+# Testing
+pytest>=8.0
+pypdf>=4.0  # PDF text verification in tests
