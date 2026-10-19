@@ -27,6 +27,8 @@ Every page has a step-by-step panel: the formula, the numbers put in, the result
 interface and the reports are in English and Turkish; `?lang=tr` or `?lang=en` in the URL
 picks one.
 
+<img src="docs/images/app_continuous.png" alt="Continuous fibers page with the step-by-step panel" width="700">
+
 ## How the ranking is checked
 
 Exercises like Callister's Concept Check 16.2 give fiber data but nothing about the matrix,
