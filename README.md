@@ -1,5 +1,6 @@
 # Fiber Composite Calculator
 
+[![Live demo](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://fiber-composite-calculator.streamlit.app/)
 [![CI](https://github.com/DailyDana/fiber-composite-calculator/actions/workflows/ci.yml/badge.svg)](https://github.com/DailyDana/fiber-composite-calculator/actions/workflows/ci.yml)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
@@ -8,6 +9,9 @@ A calculator for fiber-reinforced composites, built on the relations in chapter 
 Callister & Rethwisch, *Materials Science and Engineering: An Introduction*. You enter your
 composites, it ranks them by strength along the fibers, explains why the ranking comes out
 the way it does, and writes it all up as a PDF with every step of the math.
+
+Try it without installing anything: **[fiber-composite-calculator.streamlit.app](https://fiber-composite-calculator.streamlit.app/)**
+(Turkish: [?lang=tr](https://fiber-composite-calculator.streamlit.app/?lang=tr)).
 
 ![Compare and rank page](docs/images/app_compare.png)
 
