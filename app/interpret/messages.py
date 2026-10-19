@@ -13,7 +13,7 @@ from typing import Any
 
 from app.core.models import FiberType
 
-__all__ = ["Message", "Names", "Num", "Order", "Section"]
+__all__ = ["Message", "Names", "Num", "Order", "Section", "Values"]
 
 
 class Section(StrEnum):
@@ -48,7 +48,15 @@ class Order:
     items: tuple[str, ...]
 
 
-Param = Num | Names | Order | FiberType | str
+@dataclass(frozen=True)
+class Values:
+    """Named values, rendered "C: 2205,0; D: 1668,4"."""
+
+    items: tuple[tuple[str, float], ...]
+    nd: int = 1
+
+
+Param = Num | Names | Order | Values | FiberType | str
 
 
 @dataclass(frozen=True)

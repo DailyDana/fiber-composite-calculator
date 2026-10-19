@@ -10,14 +10,19 @@ from __future__ import annotations
 import itertools
 from collections.abc import Sequence
 
+from app.core.compare import rank
 from app.core.models import CompositeResult, FiberType, LengthRegime, RankingResult
-from app.interpret.messages import Message, Names, Num, Order, Section
+from app.interpret.messages import Message, Names, Num, Order, Section, Values
 
-__all__ = ["MATRIX_REALISTIC_LIMIT", "SMALL_EFFICIENCY_SPREAD", "explain"]
+__all__ = ["MATRIX_EXAMPLE", "MATRIX_REALISTIC_LIMIT", "SMALL_EFFICIENCY_SPREAD", "explain"]
 
 #: A common σm' above this (MPa) is out of reach for polymer matrices, whose
 #: tensile strengths are typically below ~100 MPa; σm' cannot exceed them.
 MATRIX_REALISTIC_LIMIT = 200.0
+
+#: σm' used to demonstrate robustness when no matrix data is given: an upper
+#: bound for polymer matrices.
+MATRIX_EXAMPLE = 100.0
 
 #: Length efficiencies spanning less than this are called "close".
 SMALL_EFFICIENCY_SPREAD = 0.05
@@ -243,6 +248,21 @@ def _matrix(ranking: RankingResult) -> list[Message]:
             {"value": Num(th.sigma_m, 0), "upper": th.upper, "lower": th.lower},
         )
     )
+    if ranking.sigma_m_prime is None:
+        # Demonstrate it: recompute with a generous polymer-matrix σm'.
+        example = rank([r.spec for r in ranking.results], MATRIX_EXAMPLE)
+        if example.order == ranking.order:
+            out.append(
+                Message(
+                    Section.MATRIX,
+                    "mat.example",
+                    {
+                        "value": Num(MATRIX_EXAMPLE, 0),
+                        "values": Values(tuple((r.spec.name, r.strength) for r in example.results)),
+                        "order": Order(example.order),
+                    },
+                )
+            )
     key = "mat.unrealistic" if th.sigma_m > MATRIX_REALISTIC_LIMIT else "mat.sensitive"
     out.append(
         Message(

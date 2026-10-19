@@ -231,6 +231,10 @@ STRINGS: dict[str, str] = {
         "the smallest common matrix stress that would swap two composites is "
         "σm' = Δ(fiber term) / ΔVf ≈ {value} MPa (pair {upper}–{lower})."
     ),
+    "mat.example": (
+        "for example, with σm' = {value} MPa, a generous value for polymer matrices, the "
+        "strengths become {values} MPa and the ranking stays {order}."
+    ),
     "mat.unrealistic": (
         "polymer matrices typically have tensile strengths below 100 MPa and σm' cannot exceed "
         "them. The threshold of {value} MPa is far above any realistic value, so the "
@@ -263,6 +267,7 @@ STRINGS: dict[str, str] = {
     "step.fiber_term": "Fiber term",
     "step.matrix_term": "Matrix term",
     "step.total": "Composite strength",
+    "step.threshold": "Smallest σm' that reorders the ranking (F: fiber term)",
     "step.ecl": "Longitudinal modulus (isostrain)",
     "step.ect": "Transverse modulus (isostress)",
     "step.load_ratio": "Fiber-to-matrix load ratio",

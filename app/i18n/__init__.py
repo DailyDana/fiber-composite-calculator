@@ -6,9 +6,21 @@ from typing import Any
 
 from app.core.models import FiberType
 from app.i18n import en, tr
-from app.interpret.messages import Message, Names, Num, Order
+from app.interpret.messages import Message, Names, Num, Order, Values
 
-__all__ = ["DEFAULT_LANG", "LANGS", "fiber_label", "fmt", "render", "t", "tex_num"]
+__all__ = [
+    "DEFAULT_LANG",
+    "LANGS",
+    "capitalize",
+    "fiber_label",
+    "fmt",
+    "fmt_auto",
+    "pct",
+    "render",
+    "t",
+    "tex_auto",
+    "tex_num",
+]
 
 LANGS: dict[str, str] = {"tr": "Türkçe", "en": "English"}
 DEFAULT_LANG = "tr"
@@ -76,12 +88,15 @@ def _render_param(value: Any, lang: str) -> str:
         return ", ".join(items[:-1]) + t("list.and", lang) + items[-1]
     if isinstance(value, Order):
         return " > ".join(value.items)
+    if isinstance(value, Values):
+        return "; ".join(f"{name}: {fmt(v, value.nd, lang)}" for name, v in value.items)
     if isinstance(value, FiberType):
         return fiber_label(value, lang)
     return str(value)
 
 
-def _capitalize(text: str, lang: str) -> str:
+def capitalize(text: str, lang: str = DEFAULT_LANG) -> str:
+    """Upper-case only the first letter (str.capitalize would lower the rest: MPa)."""
     if not text:
         return text
     first = text[0]
@@ -92,4 +107,4 @@ def _capitalize(text: str, lang: str) -> str:
 
 def render(message: Message, lang: str = DEFAULT_LANG) -> str:
     params = {k: _render_param(v, lang) for k, v in message.params.items()}
-    return _capitalize(t(message.key, lang, **params), lang)
+    return capitalize(t(message.key, lang, **params), lang)

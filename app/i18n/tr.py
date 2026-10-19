@@ -234,6 +234,10 @@ STRINGS: dict[str, str] = {
         "iki kompozitin yer değiştirmesi için gereken en küçük ortak matris gerilmesi "
         "σm' = Δ(elyaf terimi) / ΔVf ≈ {value} MPa'dır ({upper}–{lower} çifti)."
     ),
+    "mat.example": (
+        "örneğin polimer matrisler için cömert bir değer olan σm' = {value} MPa alındığında "
+        "dayanımlar {values} MPa olur ve sıralama yine {order} şeklinde kalır."
+    ),
     "mat.unrealistic": (
         "polimer matrislerin çekme dayanımı tipik olarak 100 MPa'nın altındadır ve σm' bu "
         "değeri aşamaz. {value} MPa'lık eşik gerçekçi değerlerin çok üzerinde "
@@ -266,6 +270,7 @@ STRINGS: dict[str, str] = {
     "step.fiber_term": "Elyaf terimi",
     "step.matrix_term": "Matris terimi",
     "step.total": "Kompozit dayanımı",
+    "step.threshold": "Sırayı bozan en küçük σm' (F: elyaf terimi)",
     "step.ecl": "Boyuna elastik modül (eş-gerinim)",
     "step.ect": "Enine elastik modül (eş-gerilme)",
     "step.load_ratio": "Elyaf/matris yük oranı",

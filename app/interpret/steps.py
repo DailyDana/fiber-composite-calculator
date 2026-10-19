@@ -11,7 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from app.core import formulas as f
-from app.core.models import CompositeResult, LengthRegime
+from app.core.models import CompositeResult, LengthRegime, RankingResult
 from app.i18n import DEFAULT_LANG, tex_auto, tex_num
 
 __all__ = [
@@ -21,6 +21,7 @@ __all__ = [
     "discontinuous_steps",
     "orientation_step",
     "particle_steps",
+    "threshold_step",
 ]
 
 SF = r"\sigma^{*}_{f}"
@@ -43,24 +44,26 @@ def discontinuous_steps(
     s = r.spec
     a = lambda x: tex_auto(x, lang)  # noqa: E731 - local shorthand keeps lines readable
     vf = tex_num(s.vf, 2, lang)
+    lc = tex_num(s.lc, 2, lang)
     eta = tex_num(r.efficiency, 4, lang)
     fiber = tex_num(r.fiber_term, 1, lang)
     steps: list[Step] = []
     if r.regime is LengthRegime.LONG:
-        steps.append(Step("step.regime_long", rf"l = {a(s.l)}{MM} \geq l_c = {a(s.lc)}{MM}"))
+        steps.append(Step("step.regime_long", rf"l = {a(s.l)}{MM} \geq l_c = {lc}{MM}"))
         steps.append(
             Step(
                 "step.efficiency",
-                rf"\eta = 1 - \frac{{l_c}}{{2l}} = "
-                rf"1 - \frac{{{a(s.lc)}}}{{2 \cdot {a(s.l)}}} = {eta}",
+                rf"\eta = 1 - \dfrac{{l_c}}{{2l}} = "
+                rf"1 - \dfrac{{{lc}}}{{2 \cdot {a(s.l)}}} = {eta}",
             )
         )
     else:
-        steps.append(Step("step.regime_short", rf"l = {a(s.l)}{MM} < l_c = {a(s.lc)}{MM}"))
+        steps.append(Step("step.regime_short", rf"l = {a(s.l)}{MM} < l_c = {lc}{MM}"))
         steps.append(
             Step(
                 "step.efficiency",
-                rf"\eta = \frac{{l}}{{2 l_c}} = \frac{{{a(s.l)}}}{{2 \cdot {a(s.lc)}}} = {eta}",
+                rf"\eta = \dfrac{{l}}{{2 l_c}} = "
+                rf"\dfrac{{{a(s.l)}}}{{2 \cdot {lc}}} = {eta}",
             )
         )
     steps.append(
@@ -96,7 +99,7 @@ def critical_length_step(
     a = lambda x: tex_auto(x, lang)  # noqa: E731
     return Step(
         "step.lc",
-        rf"l_c = \frac{{{SF} d}}{{2 \tau_c}} = \frac{{{a(sigma_f)} \cdot {a(d_mm)}}}"
+        rf"l_c = \dfrac{{{SF} d}}{{2 \tau_c}} = \dfrac{{{a(sigma_f)} \cdot {a(d_mm)}}}"
         rf"{{2 \cdot {a(tau_c)}}} = {tex_num(lc, 3, lang)}{MM}",
     )
 
@@ -124,8 +127,8 @@ def continuous_steps(
         ),
         Step(
             "step.ect",
-            rf"E_{{ct}} = \frac{{E_m E_f}}{{(1 - V_f) E_f + V_f E_m}} = "
-            rf"\frac{{{a(em)} \cdot {a(ef)}}}{{{vm} \cdot {a(ef)} + {v} \cdot {a(em)}}}"
+            rf"E_{{ct}} = \dfrac{{E_m E_f}}{{(1 - V_f) E_f + V_f E_m}} = "
+            rf"\dfrac{{{a(em)} \cdot {a(ef)}}}{{{vm} \cdot {a(ef)} + {v} \cdot {a(em)}}}"
             rf" = {tex_num(ect, 2, lang)}{GPA}",
         ),
     ]
@@ -134,8 +137,8 @@ def continuous_steps(
         steps.append(
             Step(
                 "step.load_ratio",
-                rf"\frac{{F_f}}{{F_m}} = \frac{{E_f V_f}}{{E_m V_m}} = "
-                rf"\frac{{{a(ef)} \cdot {v}}}{{{a(em)} \cdot {vm}}} = {tex_num(ratio, 2, lang)}",
+                rf"\dfrac{{F_f}}{{F_m}} = \dfrac{{E_f V_f}}{{E_m V_m}} = "
+                rf"\dfrac{{{a(ef)} \cdot {v}}}{{{a(em)} \cdot {vm}}} = {tex_num(ratio, 2, lang)}",
             )
         )
     if sigma_f is not None and sigma_m_prime is not None:
@@ -153,22 +156,23 @@ def continuous_steps(
             Step(
                 "step.forces",
                 rf"F_c = \sigma_c A = {a(stress)} \cdot {a(area)} = {tex_num(ls.fc, 0, lang)}{N};"
-                rf"\; F_m = \frac{{F_c}}{{1 + F_f/F_m}} = {tex_num(ls.fm, 0, lang)}{N};"
+                rf"\; F_m = \dfrac{{F_c}}{{1 + F_f/F_m}} = {tex_num(ls.fm, 0, lang)}{N};"
                 rf"\; F_f = {tex_num(ls.ff, 0, lang)}{N}",
             )
         )
         steps.append(
             Step(
                 "step.stresses",
-                rf"\sigma_f = \frac{{F_f}}{{V_f A}} = {tex_num(ls.sigma_f, 1, lang)}{MPA};"
-                rf"\; \sigma_m = \frac{{F_m}}{{V_m A}} = {tex_num(ls.sigma_m, 2, lang)}{MPA}",
+                rf"\sigma_f = \dfrac{{F_f}}{{V_f A}} = {tex_num(ls.sigma_f, 1, lang)}{MPA};"
+                rf"\; \sigma_m = \dfrac{{F_m}}{{V_m A}} = {tex_num(ls.sigma_m, 2, lang)}{MPA}",
             )
         )
         steps.append(
             Step(
                 "step.strain",
-                rf"\varepsilon = \frac{{\sigma_m}}{{E_m}} = \frac{{{tex_num(ls.sigma_m, 2, lang)}}}"
-                rf"{{{a(em * 1000)}}} = {tex_num(ls.strain * 1000, 3, lang)} \times 10^{{-3}}",
+                rf"\varepsilon = \dfrac{{\sigma_m}}{{E_m}} = "
+                rf"\dfrac{{{tex_num(ls.sigma_m, 2, lang)}}}{{{a(em * 1000)}}} = "
+                rf"{tex_num(ls.strain * 1000, 3, lang)} \times 10^{{-3}}",
             )
         )
     return steps
@@ -197,8 +201,25 @@ def particle_steps(ep: float, em: float, vp: float, lang: str = DEFAULT_LANG) ->
         ),
         Step(
             "step.particle_lower",
-            rf"E_c(l) = \frac{{E_m E_p}}{{V_m E_p + V_p E_m}} = "
-            rf"\frac{{{a(em)} \cdot {a(ep)}}}{{{vm} \cdot {a(ep)} + {v} \cdot {a(em)}}}"
+            rf"E_c(l) = \dfrac{{E_m E_p}}{{V_m E_p + V_p E_m}} = "
+            rf"\dfrac{{{a(em)} \cdot {a(ep)}}}{{{vm} \cdot {a(ep)} + {v} \cdot {a(em)}}}"
             rf" = {tex_num(low, 1, lang)}{GPA}",
         ),
     ]
+
+
+def threshold_step(ranking: RankingResult, lang: str = DEFAULT_LANG) -> Step | None:
+    """The matrix flip threshold written out: σm' = ΔF / ΔVf for the critical pair."""
+    th = ranking.flip_threshold
+    if th is None:
+        return None
+    by_name = {r.spec.name: r for r in ranking.results}
+    up, low = by_name[th.upper], by_name[th.lower]
+    u, w = th.upper, th.lower
+    return Step(
+        "step.threshold",
+        rf"{SM} = \dfrac{{F_{{{u}}} - F_{{{w}}}}}{{V_{{f,{u}}} - V_{{f,{w}}}}} = "
+        rf"\dfrac{{{tex_num(up.fiber_term, 1, lang)} - {tex_num(low.fiber_term, 1, lang)}}}"
+        rf"{{{tex_num(up.spec.vf, 2, lang)} - {tex_num(low.spec.vf, 2, lang)}}}"
+        rf" = {tex_num(th.sigma_m, 0, lang)}{MPA}",
+    )
