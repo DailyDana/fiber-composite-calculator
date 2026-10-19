@@ -16,9 +16,11 @@ docs/FORMULAS.md lists every formula with its derivation notes.
 from __future__ import annotations
 
 import math
+from typing import NamedTuple
 
 __all__ = [
     "NEAR_CONTINUOUS_RATIO",
+    "LoadSharing",
     "check_fraction",
     "check_positive",
     "continuous_longitudinal_modulus",
@@ -30,6 +32,7 @@ __all__ = [
     "discontinuous_modulus",
     "length_efficiency",
     "load_ratio",
+    "load_sharing",
     "particle_bounds",
 ]
 
@@ -135,6 +138,35 @@ def load_ratio(ef: float, em: float, vf: float) -> float:
     if vf >= 1.0:
         raise ValueError("vf must be < 1 for a load ratio (no matrix left)")
     return ef * vf / (em * (1.0 - vf))
+
+
+class LoadSharing(NamedTuple):
+    """Longitudinal load split of a continuous aligned composite (isostrain)."""
+
+    fc: float  # total load, N
+    ff: float  # fiber load, N
+    fm: float  # matrix load, N
+    sigma_f: float  # fiber stress, MPa
+    sigma_m: float  # matrix stress, MPa
+    strain: float  # common strain (dimensionless)
+
+
+def load_sharing(ef: float, em: float, vf: float, stress: float, area: float) -> LoadSharing:
+    """Split ``Fc = σc·A`` between fibers and matrix with ``Ff/Fm = Ef Vf / (Em Vm)``.
+
+    ``stress`` MPa, ``area`` mm² (so loads are in N), moduli GPa.
+    """
+    check_positive("stress", stress)
+    check_positive("area", area)
+    ratio = load_ratio(ef, em, vf)
+    fc = stress * area
+    fm = fc / (1.0 + ratio)
+    ff = fc - fm
+    if vf == 0.0:
+        raise ValueError("vf must be > 0 for a load split")
+    sigma_f = ff / (vf * area)
+    sigma_m = fm / ((1.0 - vf) * area)
+    return LoadSharing(fc, ff, fm, sigma_f, sigma_m, sigma_m / (em * 1000.0))
 
 
 def continuous_longitudinal_strength(sigma_f: float, vf: float, sigma_m_prime: float) -> float:
