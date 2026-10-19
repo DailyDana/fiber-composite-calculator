@@ -73,7 +73,10 @@ else:
     st.info(T("disc.between", eff=pct(r.efficiency, 1, lg)))
 
 st.subheader(T("chart.sl.title"))
-show_figure(F.strength_length_chart(sigma_f, vf, lc, l, sigma_m or 0.0, lg), T("chart.sl.title"))
+show_figure(
+    lambda th: F.strength_length_chart(sigma_f, vf, lc, l, sigma_m or 0.0, lg, theme=th),
+    T("chart.sl.title"),
+)
 
 with st.expander(T("steps.title"), expanded=True):
     show_steps(([lc_step] if lc_step else []) + discontinuous_steps(r, sigma_m, lg))

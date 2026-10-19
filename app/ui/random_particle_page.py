@@ -39,7 +39,7 @@ choice = st.radio(
 )
 k = choice[1]
 st.metric("Ecd", f"{fmt(f.discontinuous_modulus(k, ef, em, vf), 2, lg)} GPa")
-show_figure(F.orientation_chart(ef, em, vf, k, lg), T("chart.orient.title"))
+show_figure(lambda th: F.orientation_chart(ef, em, vf, k, lg, theme=th), T("chart.orient.title"))
 st.caption(T("rp.k_note"))
 with st.expander(T("steps.title")):
     show_steps([orientation_step(k, ef, em, vf, lg)])
@@ -55,6 +55,6 @@ upper, lower = f.particle_bounds(ep, em_p, vp)
 q1, q2 = st.columns(2)
 q1.metric(T("rp.upper"), f"{fmt(upper, 1, lg)} GPa")
 q2.metric(T("rp.lower"), f"{fmt(lower, 1, lg)} GPa")
-show_figure(F.particle_chart(ep, em_p, vp, lg), T("chart.particle.title"))
+show_figure(lambda th: F.particle_chart(ep, em_p, vp, lg, theme=th), T("chart.particle.title"))
 with st.expander(T("steps.title")):
     show_steps(particle_steps(ep, em_p, vp, lg))

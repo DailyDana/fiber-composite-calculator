@@ -29,7 +29,8 @@ Try it without installing anything: **[fiber-composite-calculator.streamlit.app]
 
 Every page has a step-by-step panel: the formula, the numbers put in, the result. The
 interface and the reports are in English and Turkish; `?lang=tr` or `?lang=en` in the URL
-picks one.
+picks one. The app opens in your system's light or dark theme, charts included, and the ⋮ menu
+switches it. PDF reports are always light so they print well.
 
 <img src="docs/images/app_continuous.png" alt="Continuous fibers page with the step-by-step panel" width="700">
 
@@ -91,7 +92,8 @@ Callister Bölüm 16 bağıntılarıyla çalışan bir kompozit hesaplayıcı. K
 program onları elyaf doğrultusundaki dayanıma göre sıralar, her etkenin sonuca katkısını
 yazıyla açıklar ve tüm adımları içeren bir PDF rapor üretir. Sürekli/süreksiz elyaf, yönlenme
 verimi ve parçacık kompozit sayfaları da var. Arayüz Türkçe açılır; kenar çubuğundan
-İngilizceye geçilebilir.
+İngilizceye geçilebilir. Sistem açık ya da koyu temadaysa uygulama da öyle açılır; ⋮ menüsünden
+değiştirilebilir.
 
 ## License
 

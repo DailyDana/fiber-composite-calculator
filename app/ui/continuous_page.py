@@ -96,7 +96,7 @@ if stress is not None and area is not None and vf > 0:
     n[4].metric(T("cont.strain"), f"{fmt(ls.strain * 1000, 3, lg)}·10⁻³")
 
 st.subheader(T("chart.mix.title"))
-show_figure(F.mixture_chart(ef, em, vf, lg), T("chart.mix.title"))
+show_figure(lambda th: F.mixture_chart(ef, em, vf, lg, theme=th), T("chart.mix.title"))
 
 with st.expander(T("steps.title"), expanded=True):
     show_steps(continuous_steps(ef, em, vf, sigma_f, sigma_m, stress, area, lg))

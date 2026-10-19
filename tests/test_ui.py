@@ -92,3 +92,13 @@ def test_language_from_query_param() -> None:
     at.run()
     assert not at.exception
     assert at.title[0].value == "Compare and rank composites"
+
+
+def test_chart_html_ships_both_themes() -> None:
+    from app.ui.common import chart_html
+
+    out = chart_html(b"\x89PNGlight", b"\x89PNGdark", 'Strength "σ" <chart>')
+    assert out.count("<img") == 2
+    assert 'class="fcc-light"' in out and 'class="fcc-dark"' in out
+    assert "prefers-color-scheme: dark" in out
+    assert "&lt;chart&gt;" in out and "<chart>" not in out  # alt text escaped

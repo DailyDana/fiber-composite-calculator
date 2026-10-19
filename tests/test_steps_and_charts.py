@@ -95,3 +95,33 @@ def test_turkish_decimal_ticks() -> None:
     fig.canvas.draw()
     labels = [lbl.get_text() for lbl in fig.axes[0].get_xticklabels()]
     assert "0,2" in labels
+
+
+def test_dark_theme_keeps_fiber_mapping_and_surface() -> None:
+    from matplotlib.colors import to_hex
+
+    fig = F.strength_bars(rank(KK16_2), "en", theme=F.DARK)
+    assert to_hex(fig.get_facecolor()) == F.DARK.surface
+    carbon, glass = F.DARK.fiber[FiberType.CARBON], F.DARK.fiber[FiberType.GLASS]
+    assert _bar_colors(fig) == [carbon, carbon, glass, glass]
+
+
+@pytest.mark.parametrize("theme", [F.LIGHT, F.DARK], ids=["light", "dark"])
+def test_all_charts_render_in_both_themes(theme: F.Theme) -> None:
+    ranking = rank(KK16_2, 50.0)
+    figures = [
+        F.strength_bars(ranking, "tr", theme=theme),
+        F.ratio_chart(ranking, "tr", theme=theme),
+        F.efficiency_curve(ranking, "tr", theme=theme),
+        F.mixture_chart(69, 3.4, 0.4, "tr", theme=theme),
+        F.strength_length_chart(3500, 0.3, 0.7, 8, 30, "tr", theme=theme),
+        F.orientation_chart(69, 3.4, 0.4, 3 / 8, "tr", theme=theme),
+        F.particle_chart(407, 110, 0.5, "tr", theme=theme),
+    ]
+    for fig in figures:
+        assert F.figure_to_png(fig, dpi=50).startswith(b"\x89PNG")
+
+
+def test_themes_cover_every_fiber_type() -> None:
+    for theme in (F.LIGHT, F.DARK):
+        assert set(theme.fiber) == set(FiberType)

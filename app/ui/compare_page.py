@@ -202,11 +202,11 @@ tab1, tab2, tab3 = st.tabs(
     [T("chart.strength.title"), T("chart.ratio.title"), T("chart.eff.title")]
 )
 with tab1:
-    show_figure(F.strength_bars(ranking, lg), T("chart.strength.title"))
+    show_figure(lambda th: F.strength_bars(ranking, lg, theme=th), T("chart.strength.title"))
 with tab2:
-    show_figure(F.ratio_chart(ranking, lg), T("chart.ratio.title"))
+    show_figure(lambda th: F.ratio_chart(ranking, lg, theme=th), T("chart.ratio.title"))
 with tab3:
-    show_figure(F.efficiency_curve(ranking, lg), T("chart.eff.title"))
+    show_figure(lambda th: F.efficiency_curve(ranking, lg, theme=th), T("chart.eff.title"))
 
 st.subheader(T("cmp.interpretation"))
 show_messages(explain(ranking))
