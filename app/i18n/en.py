@@ -70,25 +70,20 @@ STRINGS: dict[str, str] = {
     "cmp.interpretation": "Interpretation",
     "cmp.need_rows": "Enter at least one valid composite row.",
     "cmp.report": "Report",
-    "rep.course": "Course",
-    "rep.course_default": "Materials Science",
     "rep.title": "Report title",
     "rep.title_default": "Strength Ranking of Aligned Discontinuous-Fiber Composites",
-    "rep.question": "Question",
-    "rep.question_default": (
-        "Rank the strengths of the four hypothetical aligned discontinuous fiber-reinforced "
-        "composites A to D in the direction of reinforcement from highest to lowest and justify "
-        "the ranking, taking fiber type, fiber volume fraction, fiber strength, mean fiber "
-        "length and critical length into account (Callister, Concept Check 16.2)."
-    ),
-    "rep.student": "Name",
-    "rep.number": "Student ID",
     "rep.date": "Date",
     "rep.footer_toggle": "Print the program name in the footer",
     "rep.download": "Download PDF report",
     "rep.filename": "composite_report.pdf",
     # --- report sections ---
-    "rep.sec.question": "1. Question and given data",
+    "rep.sec.question": "1. Purpose and input data",
+    "rep.purpose": (
+        "This report ranks the aligned discontinuous-fiber composites of Table 1 by their "
+        "strength in the direction of reinforcement. The effects of fiber type, fiber volume "
+        "fraction, fiber strength, mean fiber length and critical length are discussed one by "
+        "one, and the sensitivity of the ranking to the matrix contribution is checked."
+    ),
     "rep.sec.theory": "2. Theoretical background",
     "rep.sec.calc": "3. Calculations",
     "rep.sec.results": "4. Results and charts",
@@ -117,7 +112,7 @@ STRINGS: dict[str, str] = {
     "rep.calc.intro": "For each composite the length regime is checked first, then the strength is computed.",
     "rep.calc.composite": "Composite {name} ({fiber} fiber)",
     "rep.results.table": "Table 2. Results (sorted by strength)",
-    "rep.given.table": "Table 1. Given composite properties",
+    "rep.given.table": "Table 1. Composite properties",
     "rep.fig": "Figure {n}. {title}",
     "rep.references.callister": (
         "W. D. Callister, D. G. Rethwisch, Materials Science and Engineering: An Introduction, "
@@ -238,7 +233,7 @@ STRINGS: dict[str, str] = {
     "mat.unrealistic": (
         "polymer matrices typically have tensile strengths below 100 MPa and σm' cannot exceed "
         "them. The threshold of {value} MPa is far above any realistic value, so the "
-        "ranking is independent of the matrix; this verifies the ranking."
+        "ranking is independent of the matrix; this check verifies the ranking."
     ),
     "mat.sensitive": (
         "this threshold is close to realistic matrix stresses (below {limit} MPa); without "

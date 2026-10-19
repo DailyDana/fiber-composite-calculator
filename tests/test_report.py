@@ -21,15 +21,7 @@ def _text(pdf: bytes) -> str:
 
 @pytest.fixture(scope="module")
 def turkish_pdf() -> bytes:
-    meta = ReportMeta(
-        lang="tr",
-        course="Malzeme Bilimi",
-        title=t("rep.title_default", "tr"),
-        question=t("rep.question_default", "tr"),
-        student="Öğrenci Şahıs",
-        number="123",
-        date="19.10.2026",
-    )
+    meta = ReportMeta(lang="tr", title=t("rep.title_default", "tr"), date="19.10.2026")
     return build_compare_report(KK16_2, None, meta)
 
 
@@ -40,8 +32,15 @@ def test_is_pdf(turkish_pdf: bytes) -> None:
 
 def test_turkish_glyphs_extract(turkish_pdf: bytes) -> None:
     text = _text(turkish_pdf)
-    for word in ("Öğrenci Şahıs", "Sıralamanın doğruluğunun gösterilmesi", "İki kompozitin"):
+    for word in ("Süreksiz Elyaflı", "Sıralamanın doğrulanması", "İki kompozitin", "Amaç"):
         assert word in text
+
+
+def test_no_personal_or_course_fields() -> None:
+    import dataclasses
+
+    fields = {f.name for f in dataclasses.fields(ReportMeta)}
+    assert fields == {"lang", "title", "date", "footer"}
 
 
 def test_sections_and_numbers(turkish_pdf: bytes) -> None:

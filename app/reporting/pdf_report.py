@@ -1,6 +1,6 @@
-"""A4 PDF report for a composite comparison (homework-ready).
+"""A4 PDF report for a composite comparison.
 
-Structure: question and given data → theory → step-by-step calculations →
+Structure: purpose and input data → theory → step-by-step calculations →
 results table and charts → discussion per factor → verification of the
 ranking (matrix threshold) → conclusion → reference.
 
@@ -63,11 +63,7 @@ CONTENT_WIDTH = A4[0] - 4 * cm
 @dataclass(frozen=True)
 class ReportMeta:
     lang: str = "tr"
-    course: str = ""
     title: str = ""
-    question: str = ""
-    student: str = ""
-    number: str = ""
     date: str = ""
     footer: bool = False
 
@@ -239,19 +235,15 @@ def build_compare_report(
     story: list = []  # type: ignore[type-arg]
 
     # --- heading ---------------------------------------------------------
-    if meta.course:
-        story.append(_p(meta.course, st["meta"]))
     story.append(_p(meta.title or t("rep.title_default", lang), st["title"]))
-    who = [x for x in (meta.student, meta.number, meta.date) if x]
-    if who:
-        story.append(_p("  ·  ".join(who), st["meta"]))
+    if meta.date:
+        story.append(_p(meta.date, st["meta"]))
     story.append(Spacer(1, 6))
 
     # --- 1. question and data -----------------------------------------------
     story.append(_p(t("rep.sec.question", lang), st["h1"]))
-    if meta.question:
-        story.append(_p(meta.question, st["body"]))
-        story.append(Spacer(1, 6))
+    story.append(_p(t("rep.purpose", lang), st["body"]))
+    story.append(Spacer(1, 6))
     w = CONTENT_WIDTH
     story.append(
         _table(
@@ -360,8 +352,7 @@ def build_compare_report(
         topMargin=1.8 * cm,
         bottomMargin=2 * cm,
         title=meta.title or t("rep.title_default", lang),
-        author=meta.student,
-        subject=meta.course,
+        author="",
         creator="fiber-composite-calculator" if meta.footer else "",
     )
     doc.build(story, onFirstPage=_footer, onLaterPages=_footer)

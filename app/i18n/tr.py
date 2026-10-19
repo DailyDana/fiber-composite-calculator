@@ -70,31 +70,25 @@ STRINGS: dict[str, str] = {
     "cmp.interpretation": "Yorum",
     "cmp.need_rows": "En az bir geçerli kompozit satırı girin.",
     "cmp.report": "Rapor",
-    "rep.course": "Ders",
-    "rep.course_default": "Malzeme Bilimi",
     "rep.title": "Rapor başlığı",
     "rep.title_default": "Hizalanmış Süreksiz Elyaflı Kompozitlerin Dayanım Sıralaması",
-    "rep.question": "Soru metni",
-    "rep.question_default": (
-        "A'dan D'ye kadar adlandırılmış dört hayali hizalanmış süreksiz elyaf takviyeli "
-        "kompozitin takviye doğrultusundaki dayanımlarını en yüksekten en düşüğe doğru "
-        "sıralayınız ve sıralamanın doğruluğunu gösteriniz. Yorumda elyaf türü, elyaf hacim "
-        "oranı, elyaf dayanımı, ortalama elyaf uzunluğu ve kritik uzunluk dikkate alınacaktır "
-        "(Callister, Kavram Kontrol 16.2)."
-    ),
-    "rep.student": "Ad Soyad",
-    "rep.number": "Öğrenci no",
     "rep.date": "Tarih",
     "rep.footer_toggle": "Rapora program adını yaz (alt bilgi)",
     "rep.download": "PDF raporu indir",
     "rep.filename": "kompozit_rapor.pdf",
     # --- rapor bölümleri ---
-    "rep.sec.question": "1. Soru ve verilenler",
+    "rep.sec.question": "1. Amaç ve girdi verileri",
+    "rep.purpose": (
+        "Bu raporda, özellikleri Tablo 1'de verilen hizalanmış süreksiz elyaflı kompozitler "
+        "takviye doğrultusundaki dayanımlarına göre sıralanmıştır. Elyaf türü, elyaf hacim oranı, "
+        "elyaf dayanımı, ortalama elyaf uzunluğu ve kritik uzunluğun etkisi ayrı ayrı yorumlanmış; "
+        "sıralamanın matris katkısına duyarlılığı sınanmıştır."
+    ),
     "rep.sec.theory": "2. Kuramsal arka plan",
     "rep.sec.calc": "3. Hesaplar",
     "rep.sec.results": "4. Sonuçlar ve grafikler",
     "rep.sec.discussion": "5. Yorum",
-    "rep.sec.verification": "6. Sıralamanın doğruluğunun gösterilmesi",
+    "rep.sec.verification": "6. Sıralamanın doğrulanması",
     "rep.sec.conclusion": "7. Sonuç",
     "rep.sec.references": "Kaynak",
     "rep.given": "Verilenler",
@@ -117,7 +111,7 @@ STRINGS: dict[str, str] = {
     "rep.calc.intro": "Her kompozit için önce uzunluk bölgesi belirlenmiş, ardından dayanım hesaplanmıştır.",
     "rep.calc.composite": "Kompozit {name} ({fiber} elyaf)",
     "rep.results.table": "Tablo 2. Hesap sonuçları (dayanıma göre sıralı)",
-    "rep.given.table": "Tablo 1. Verilen kompozit özellikleri",
+    "rep.given.table": "Tablo 1. Kompozit özellikleri",
     "rep.fig": "Şekil {n}. {title}",
     "rep.references.callister": (
         "W. D. Callister, D. G. Rethwisch, Malzeme Bilimi ve Mühendisliği (Türkçe çeviri), "
@@ -241,7 +235,7 @@ STRINGS: dict[str, str] = {
     "mat.unrealistic": (
         "polimer matrislerin çekme dayanımı tipik olarak 100 MPa'nın altındadır ve σm' bu "
         "değeri aşamaz. {value} MPa'lık eşik gerçekçi değerlerin çok üzerinde "
-        "olduğundan sıralama matristen bağımsızdır; sıralamanın doğruluğu bu şekilde gösterilmiş olur."
+        "olduğundan sıralama matristen bağımsızdır; sıralama bu sınamayla doğrulanmış olur."
     ),
     "mat.sensitive": (
         "bu eşik gerçekçi matris gerilmeleri aralığına yakındır ({limit} MPa altı); matris "

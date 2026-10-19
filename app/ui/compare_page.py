@@ -224,27 +224,11 @@ if threshold is not None:
 # --- report --------------------------------------------------------------
 st.header(T("cmp.report"))
 with st.container(border=True):
-    r1, r2 = st.columns(2)
-    course = r1.text_input(T("rep.course"), value=T("rep.course_default"), key=f"rep_course_{lg}")
-    title = r2.text_input(T("rep.title"), value=T("rep.title_default"), key=f"rep_title_{lg}")
-    question = st.text_area(
-        T("rep.question"), value=T("rep.question_default"), height=110, key=f"rep_q_{lg}"
-    )
-    r3, r4, r5 = st.columns(3)
-    student = r3.text_input(T("rep.student"), key="rep_student")
-    number = r4.text_input(T("rep.number"), key="rep_number")
-    when = r5.date_input(T("rep.date"), value=date.today(), key="rep_date", format="DD.MM.YYYY")
+    r1, r2 = st.columns([3, 1])
+    title = r1.text_input(T("rep.title"), value=T("rep.title_default"), key=f"rep_title_{lg}")
+    when = r2.date_input(T("rep.date"), value=date.today(), key="rep_date", format="DD.MM.YYYY")
     footer = st.checkbox(T("rep.footer_toggle"), value=False, key="rep_footer")
-    meta = ReportMeta(
-        lang=lg,
-        course=course,
-        title=title,
-        question=question,
-        student=student,
-        number=number,
-        date=when.strftime("%d.%m.%Y"),
-        footer=footer,
-    )
+    meta = ReportMeta(lang=lg, title=title, date=when.strftime("%d.%m.%Y"), footer=footer)
     st.download_button(
         T("rep.download"),
         data=_report_pdf(tuple(specs), sigma_m, meta),
