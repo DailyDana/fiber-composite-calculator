@@ -84,3 +84,11 @@ def test_orientation_particle_page(lang: str) -> None:
     at = _run("random_particle_page.py", lang=lang)
     values = list(_metrics(at).values())
     assert any(v.startswith("12") for v in values)  # random 2D Ecd ≈ 12.4 GPa
+
+
+def test_language_from_query_param() -> None:
+    at = AppTest.from_file(str(UI / "streamlit_app.py"), default_timeout=TIMEOUT)
+    at.query_params["lang"] = "en"
+    at.run()
+    assert not at.exception
+    assert at.title[0].value == "Compare and rank composites"

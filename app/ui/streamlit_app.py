@@ -21,6 +21,11 @@ from app.i18n import DEFAULT_LANG, LANGS, t  # noqa: E402
 st.set_page_config(page_title="Fiber Composite Calculator", page_icon="🧵", layout="wide")
 
 st.session_state.setdefault("lang", DEFAULT_LANG)
+# ?lang=en in a shared link picks the language once; the selector wins afterwards.
+url_lang = st.query_params.get("lang")
+if url_lang in LANGS and not st.session_state.get("lang_from_url"):
+    st.session_state["lang"] = url_lang
+    st.session_state["lang_from_url"] = True
 with st.sidebar:
     st.selectbox(t("lang.label"), list(LANGS), format_func=LANGS.__getitem__, key="lang")
 lang = st.session_state["lang"]

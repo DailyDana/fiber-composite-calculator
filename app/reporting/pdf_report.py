@@ -95,9 +95,16 @@ def _styles() -> dict[str, ParagraphStyle]:
             textColor=ACCENT,
             spaceBefore=12,
             spaceAfter=5,
+            keepWithNext=1,  # never strand a heading at the foot of a page
         ),
         "h2": ParagraphStyle(
-            "h2", parent=base, fontName="DejaVu-Bold", fontSize=10.5, spaceBefore=7, spaceAfter=2
+            "h2",
+            parent=base,
+            fontName="DejaVu-Bold",
+            fontSize=10.5,
+            spaceBefore=7,
+            spaceAfter=2,
+            keepWithNext=1,
         ),
         "step": ParagraphStyle(
             "step", parent=base, fontName="DejaVu-Oblique", fontSize=8.5, textColor=INK_2
