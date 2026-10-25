@@ -115,8 +115,8 @@ STRINGS: dict[str, str] = {
     "rep.given.table": "Table 1. Composite properties",
     "rep.fig": "Figure {n}. {title}",
     "rep.references.callister": (
-        "W. D. Callister, D. G. Rethwisch, Materials Science and Engineering: An Introduction, "
-        "Wiley, chapter 16: Composites."
+        "Callister, W. D., & Rethwisch, D. G. (2010). Materials Science and Engineering: "
+        "An Introduction (8th ed.). Wiley. Chapter 16: Composites."
     ),
     "rep.footer": "Prepared with fiber-composite-calculator",
     "rep.page": "Page {n}",
