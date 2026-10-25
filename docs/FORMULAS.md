@@ -1,9 +1,12 @@
 # Formulas
 
-Every number the app shows comes from one of the relations below. Section numbers refer to
-the composites chapter (chapter 16) of Callister & Rethwisch, *Materials Science and
-Engineering: An Introduction*. Equation numbers are left out on purpose: they move between
-editions and translations.
+Every number the app shows comes from one of the relations below. Section, example and
+concept-check numbers refer to chapter 16 (Composites) of:
+
+> Callister, W. D., & Rethwisch, D. G. (2014). *Materials Science and Engineering: An
+> Introduction* (9th ed.). Wiley.
+
+Equation numbers are left out on purpose: they move between editions and translations.
 
 Units used throughout: stress and strength in MPa, elastic modulus in GPa, lengths in mm
 (fiber diameter too), volume fractions as plain numbers between 0 and 1.

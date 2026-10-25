@@ -13,8 +13,8 @@ STRINGS: dict[str, str] = {
     "about.title": "About",
     "about.body": (
         "Relations follow Callister & Rethwisch, *Materials Science and Engineering: An "
-        "Introduction*, chapter 16. Units: stress MPa, modulus GPa, length mm. Typical material "
-        "values are approximate and not design allowables."
+        "Introduction* (9th ed., Wiley, 2014), chapter 16. Units: stress MPa, modulus GPa, "
+        "length mm. Typical material values are approximate and not design allowables."
     ),
     "steps.title": "Step-by-step calculation",
     "unit.mpa": "MPa",

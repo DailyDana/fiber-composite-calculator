@@ -95,6 +95,12 @@ verimi ve parçacık kompozit sayfaları da var. Arayüz Türkçe açılır; ken
 İngilizceye geçilebilir. Sistem açık ya da koyu temadaysa uygulama da öyle açılır; ⋮ menüsünden
 değiştirilebilir.
 
+## Reference
+
+Callister, W. D., & Rethwisch, D. G. (2014). *Materials Science and Engineering: An Introduction*
+(9th ed.). Wiley. Chapter 16: Composites. Concept Check 16.2 and Example Problem 16.1 are used as
+test cases.
+
 ## License
 
 Apache-2.0, see [LICENSE](LICENSE) and [NOTICE](NOTICE). The bundled DejaVu fonts keep their

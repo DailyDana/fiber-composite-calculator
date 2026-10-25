@@ -4,7 +4,8 @@ Copyright 2026 İsmail Bilgehan Kazancı
 Licensed under the Apache License, Version 2.0 (see LICENSE).
 
 The formulas implemented here follow W. D. Callister & D. G. Rethwisch,
-"Materials Science and Engineering: An Introduction", chapter 16 (Composites),
+"Materials Science and Engineering: An Introduction", 9th ed., Wiley (2014),
+chapter 16 (Composites),
 cited per formula in docs/FORMULAS.md. The book is not distributed with this
 software. Preset data sets restate textbook exercise values for verification.
 

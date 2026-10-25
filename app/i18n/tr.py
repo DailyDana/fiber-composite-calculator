@@ -12,9 +12,9 @@ STRINGS: dict[str, str] = {
     "nav.random_particle": "Yönlenme ve parçacık",
     "about.title": "Hakkında",
     "about.body": (
-        "Bağıntılar Callister & Rethwisch, *Malzeme Bilimi ve Mühendisliği*, Bölüm 16'dan "
-        "alınmıştır. Birimler: gerilme MPa, modül GPa, uzunluk mm. Tipik malzeme değerleri "
-        "yaklaşıktır; tasarım değeri olarak kullanılmamalıdır."
+        "Bağıntılar Callister & Rethwisch, *Materials Science and Engineering: An Introduction* "
+        "(9. baskı, Wiley, 2014), Bölüm 16'dan alınmıştır. Birimler: gerilme MPa, modül GPa, "
+        "uzunluk mm. Tipik malzeme değerleri yaklaşıktır; tasarım değeri olarak kullanılmamalıdır."
     ),
     "steps.title": "Adım adım hesap",
     "unit.mpa": "MPa",
