@@ -114,8 +114,8 @@ STRINGS: dict[str, str] = {
     "rep.given.table": "Tablo 1. Kompozit özellikleri",
     "rep.fig": "Şekil {n}. {title}",
     "rep.references.callister": (
-        "Callister, W. D., & Rethwisch, D. G. (2010). Materials Science and Engineering: "
-        "An Introduction (8th ed.). Wiley. Chapter 16: Composites."
+        "Callister, W. D., & Rethwisch, D. G. (2014). Materials Science and Engineering: "
+        "An Introduction (9th ed.). Wiley. Chapter 16: Composites."
     ),
     "rep.footer": "fiber-composite-calculator ile hazırlanmıştır",
     "rep.page": "Sayfa {n}",
